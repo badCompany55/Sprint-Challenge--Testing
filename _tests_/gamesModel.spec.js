@@ -16,11 +16,12 @@ describe("games model", () => {
     it("should insert a game", async () => {
       await games.addGame(testGame);
 
+      const data = await db("games");
       const insertObject = await db("games").first();
-      expect(insertObject.length).toBe(1);
+      expect(data.length).toBe(1);
       expect(insertObject).toHaveProperty("title", "Pacman");
       expect(insertObject).toHaveProperty("genre", "Aracde");
-      expect(insertObject).toHaveProperty("title", 1980);
+      expect(insertObject).toHaveProperty("releaseYear", 1980);
     });
   });
 });
