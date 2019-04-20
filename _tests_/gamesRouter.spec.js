@@ -29,4 +29,23 @@ describe("server", () => {
       expect(res.status).toBe(404);
     });
   });
+
+  describe("api/games POST", () => {
+    it("should return status 201 on success", async () => {
+      const req = await request(server)
+        .post("/api/games")
+        .send({ title: "Pacman", genre: "Aracade", releaseYear: 1980 });
+      expect(req.status).toBe(201);
+      expect(req.type).toBe("application/json");
+    });
+
+    it("should return 422 status for incomplete information", async () => {
+      const err = { Error: "The Title and Genre are required" };
+      const req = await request(server)
+        .post("/api/games")
+        .send({ title: "", genre: "", releaseYear: 1980 });
+      expect(req.status).toBe(422);
+      expect(req.body).toEqual(err);
+    });
+  });
 });
