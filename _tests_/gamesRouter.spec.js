@@ -24,6 +24,14 @@ describe("server", () => {
       expect(Array.isArray(res.body)).toBe(true);
     });
 
+    it("should return an array, even if there are  games", async () => {
+      const req = await request(server)
+        .post("/api/games")
+        .send({ title: "Pacman", genre: "Aracade", releaseYear: 1980 });
+      const res = await request(server).get("/api/games");
+      expect(Array.isArray(res.body)).toBe(true);
+    });
+
     it("should return status 404 on request to non existent page", async () => {
       const res = await request(server).get("/api/gam");
       expect(res.status).toBe(404);
