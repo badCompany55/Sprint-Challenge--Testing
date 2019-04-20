@@ -5,8 +5,12 @@ module.exports = {
   getGames
 };
 
-function addGame(game) {
-  return db("games").insert(game);
+async function addGame(game) {
+  const newGame = await db("games").insert(game);
+  const newGameValue = await db("games")
+    .where("title", game.title)
+    .first();
+  return newGameValue;
 }
 
 function getGames() {

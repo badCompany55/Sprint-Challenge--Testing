@@ -53,8 +53,11 @@ describe("server", () => {
       const req = await request(server)
         .post("/api/games")
         .send(newGame);
+      const newGameDB = await db("games")
+        .where("title", newGame.title)
+        .first();
       expect(req.status).toBe(201);
-      expect(req.body).toBe(newGame);
+      expect(req.body).toEqual(newGameDB);
     });
   });
 });
