@@ -44,6 +44,7 @@ describe("games model", () => {
       const allGames = await games.getGames();
 
       expect(allGames.length).toBe(2);
+      expect(Array.isArray(allGames)).toBe(true);
     });
   });
 });

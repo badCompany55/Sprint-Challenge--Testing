@@ -1,9 +1,10 @@
 const express = require("express");
+const db = require("../data/models/gamesModel.js");
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.send("Games Page");
+router.get("/", async (req, res) => {
+  res.send("testing");
 });
 
 module.exports = router;
