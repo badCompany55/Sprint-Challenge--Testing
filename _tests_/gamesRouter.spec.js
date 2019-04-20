@@ -47,5 +47,14 @@ describe("server", () => {
       expect(req.status).toBe(422);
       expect(req.body).toEqual(err);
     });
+
+    it("should return the newly create games object", async () => {
+      const newGame = { title: "Pacman", genre: "Aracade", releaseYear: 1980 };
+      const req = await request(server)
+        .post("/api/games")
+        .send(newGame);
+      expect(req.status).toBe(201);
+      expect(req.body).toBe(newGame);
+    });
   });
 });
